@@ -1,3 +1,4 @@
+import 'package:app_feedback/app_feedback.dart';
 import 'package:app_feedback/src/cubit/feedback_cubit.dart';
 import 'package:app_feedback/src/model/feedback.dart';
 import 'package:app_feedback/src/theme/theme.dart';
@@ -8,7 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class FeedbackPage extends StatelessWidget {
   final Function(UserFeedback) onSubmit;
   final VoidCallback onSkip;
-  const FeedbackPage({Key key, this.onSubmit, this.onSkip}) : super(key: key);
+  final Option option;
+  const FeedbackPage({Key key, this.onSubmit, this.onSkip, this.option})
+      : super(key: key);
 
   static MaterialPageRoute getRoute() {
     return new MaterialPageRoute(
@@ -85,8 +88,7 @@ class FeedbackPage extends StatelessWidget {
           ).pB(12),
           TextFormField(
             maxLines: 5,
-            controller:
-                context.select((FeedbackCubit value) => value.controller),
+            controller: context.select((FeedbackCubit value) => value.review),
             decoration: InputDecoration(
               hintText: "Tell us here",
               border: OutlineInputBorder(),
@@ -117,12 +119,9 @@ class FeedbackPage extends StatelessWidget {
             labelStyle: TextStyles.headline16(context).onPrimary(context),
             onPressed: () async {
               final state = context.read<FeedbackCubit>();
-              // if (state.rating == null) {
-              //   ScaffoldMessenger.of(context).showSnackBar(
-              //       SnackBar(content: Text("Choose rating first to submit")));
-
-              //   return;
-              // }
+              if (state.rating == null) {
+                return;
+              }
               if (onSubmit != null) {
                 var model = await context.read<FeedbackCubit>().getFeedback();
                 onSubmit(model);

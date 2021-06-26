@@ -1,3 +1,4 @@
+import 'package:app_feedback/app_feedback.dart';
 import 'package:app_feedback/src/helper/shared_prefrence_helper.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -6,12 +7,19 @@ import 'package:app_feedback/src/model/feedback.dart';
 part 'feedback_state.dart';
 
 class FeedbackCubit extends Cubit<FeedbackState> {
-  FeedbackCubit() : super(FeedbackInitial()) {
-    controller = TextEditingController();
+  final Option option;
+  FeedbackCubit(this.option) : super(FeedbackInitial()) {
+    review = TextEditingController();
+    if (option != null && option.defaultRating != null) {
+      if (option.defaultRating != null) {
+        setRating = option.defaultRating - 1;
+      }
+      review.text = option.defaultReview;
+    }
   }
 
   int rating;
-  TextEditingController controller;
+  TextEditingController review;
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
   set setRating(int rating) {
     this.rating = rating;
@@ -20,15 +28,7 @@ class FeedbackCubit extends Cubit<FeedbackState> {
 
   Future<UserFeedback> getFeedback() async {
     UserFeedback feedback = UserFeedback(
-        rating: rating + 1, review: controller.text, createdAt: DateTime.now());
-    // isLoading.value = true;
-    // var response = await miscRepo.saveFeedback(request);
-    // isLoading.value = false;
-    // response.fold((l) => null, (r) {
-    // final pref = getIt<SharedPreferenceHelper>();
-    // pref.saveAppFeedback(request.copyWith.call(createdAt: DateTime.now()));
-
-    // });
+        rating: rating + 1, review: review.text, createdAt: DateTime.now());
     final pref = SharedPreferenceHelper();
     await pref.saveAppFeedback(feedback);
 

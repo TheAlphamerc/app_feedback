@@ -12,9 +12,9 @@ class SharedPreferenceHelper {
     return _singleton;
   }
 
-  Future clearPreferenceValues() async {
-    await (SharedPreferences.getInstance())
-      ..clear();
+  Future<bool> resetForm() async {
+    var pref = await SharedPreferences.getInstance();
+    return pref.clear();
   }
 
   Future<bool> setInitialLoad(bool value) async {
