@@ -11,6 +11,7 @@ class CustomButton extends StatelessWidget {
       this.labelStyle,
       this.isWraped = false,
       this.isColored = true,
+      this.buttonStyle,
       this.padding = const EdgeInsets.symmetric(horizontal: 40, vertical: 12)})
       : super(key: key);
   final Function onPressed;
@@ -21,6 +22,7 @@ class CustomButton extends StatelessWidget {
   final bool isColored;
   final Color color;
   final EdgeInsetsGeometry padding;
+  final ButtonStyle buttonStyle;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,18 +31,21 @@ class CustomButton extends StatelessWidget {
         valueListenable: isLoading ?? ValueNotifier(false),
         builder: (context, loading, child) {
           return TextButton(
-            style: ButtonStyle(
-                padding: MaterialStateProperty.all(padding),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6)),
-                ),
-                backgroundColor: MaterialStateProperty.all(
-                  !isColored ? null : color ?? Theme.of(context).primaryColor,
-                ),
-                foregroundColor: MaterialStateProperty.all(
-                  Theme.of(context).colorScheme.onPrimary,
-                )),
+            style: buttonStyle ??
+                ButtonStyle(
+                    padding: MaterialStateProperty.all(padding),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6)),
+                    ),
+                    backgroundColor: MaterialStateProperty.all(
+                      !isColored
+                          ? null
+                          : color ?? Theme.of(context).primaryColor,
+                    ),
+                    foregroundColor: MaterialStateProperty.all(
+                      Theme.of(context).colorScheme.onPrimary,
+                    )),
             onPressed: loading ? null : onPressed,
             child: loading
                 ? SizedBox(
@@ -56,7 +61,7 @@ class CustomButton extends StatelessWidget {
                 : child,
           );
         },
-        child: Text(label),
+        child: Text(label, style: labelStyle),
       ),
     );
   }

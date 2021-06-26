@@ -1,7 +1,5 @@
 part of 'theme.dart';
 
-// import 'package:flutter/material.dart';
-
 class TextStyles {
   static TextStyle bodyText14(BuildContext context) =>
       context.textTheme.bodyText1.copyWith(
@@ -14,14 +12,19 @@ class TextStyles {
         fontSize: 15,
       );
 
-  static TextStyle headline16(BuildContext context) =>
+  static TextStyle headline14(BuildContext context) =>
       bodyText15(context).copyWith(
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: FontWeight.w600,
       );
 
+  static TextStyle headline16(BuildContext context) =>
+      headline14(context).copyWith(
+        fontSize: 16,
+      );
+
   static TextStyle headline18(BuildContext context) =>
-      headline16(context).copyWith(
+      headline14(context).copyWith(
         fontSize: 18,
       );
 

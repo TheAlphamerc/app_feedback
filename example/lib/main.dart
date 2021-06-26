@@ -10,7 +10,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Feedback form Demo',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       debugShowCheckedModeBanner: false,
       home: MyHomePage(),
     );
@@ -88,8 +90,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void launchAppFeedback() {
     feedbackForm.display(context,
-        option: Option(defaultRating: 5, defaultReview: "Love this app ❤️"),
-        onSubmit: (feedback) {
+        option: Option(
+          defaultRating: 5,
+          maxRating: 10,
+          ratingButtonTheme: RatingButtonThemeData.defaultTheme,
+        ), onSubmit: (feedback) {
       this.feedback = feedback;
       setState(() {});
     });
@@ -111,8 +116,10 @@ class _MyHomePageState extends State<MyHomePage> {
     feedback = null;
 
     /// Initilise the feedback form form after reseting
-    feedbackForm
-        .init(Option(duration: Duration(seconds: 10), displayLogs: true));
+    feedbackForm.init(Option(
+      duration: Duration(seconds: 10),
+      displayLogs: true,
+    ));
 
     setState(() {});
   }
