@@ -3,11 +3,20 @@
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/TheAlphamerc/app_feedback)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FTheAlphamerc%2Fapp_feedback&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 ![GitHub last commit](https://img.shields.io/github/last-commit/TheAlphamerc/app_feedback)
-
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/TheAlphamerc/app_feedback.svg)](https://github.com/TheAlphamerc/app_feedback)
+[![GitHub stars](https://img.shields.io/github/stars/Thealphamerc/app_feedback?style=social)](https://github.com/login?return_to=https://github.com/TheAlphamerc/app_feedback) 
+![GitHub forks](https://img.shields.io/github/forks/TheAlphamerc/app_feedback?style=social)
+
+[![pub package](https://img.shields.io/pub/v/app_feedback?color=blue)](https://pub.dev/packages/app_feedback) 
+[![Likes](https://badges.bar/app_feedback/likes)](https://pub.dev/packages/app_feedback/score)
+[![Popularity](https://badges.bar/app_feedback/popularity)](https://pub.dev/packages/app_feedback/score)
+[![Pub points](https://badges.bar/app_feedback/pub%20points)](https://pub.dev/packages/app_feedback/score)
 
 A Flutter package for getting app feedback from users. It provides the utility to display feedback form depending upon the requirement. 
 Feedback form can be displayed instantly at any time or after certain period of time.
+
+## Download Demo App ![GitHub All Releases](https://img.shields.io/github/downloads/Thealphamerc/app_feedback/total?color=green)
+<a href="https://github.com/TheAlphamerc/app_feedback/releases/download/v0.0.1/app-release.apk"><img src="https://playerzon.com/asset/download.png" width="200"></img></a>
 
 ## How to use this package
 
