@@ -7,6 +7,86 @@
 
 A Flutter package for getting app feedback from users.
 
+
+## How to use this packahe
+#### 1. Add library to pubspec.yml
+
+#### 2. Import library in dart file.
+```dart
+import 'package:app_feedback/app_feedback.dart';
+```
+
+#### 3. Create a instance of `AppFeedback`
+```dart
+AppFeedback feedbackForm = AppFeedback.instance;
+```
+
+#### 4. Initilise the app feedback (Ony if you want to ask user for his feedback periodically)
+```dart
+ @override
+  void initState() {
+    /// `duration` is set to 10 seconds for testing purpose.
+    /// Change this duration on the basis of how ofen you want to ask user for his feedback.
+    /// For example duration can be 15 days, 1 or 2 month etc.
+    feedbackForm.init(Option(duration: Duration(seconds: 10));
+    super.initState();
+  }
+```
+
+#### 5. Create a method which will launch the feedback form
+```dart
+ void tryDisplay() {
+    feedbackForm.tryDisplay(context, onSubmit: (feedback) {
+      print(feedback);
+    });
+  }
+```
+
+#### 6. Create a button to call `tryDisplay` method.
+```dart
+TextButton(
+    onPressed: tryDisplay,
+    child: Text("Try Display Form") 
+ ),
+```
+
+
+> **Note** 
+> 1. `feedbackForm` will only be displayed once provided duration in step 3 has passed.
+> 2. Once `feedbackForm` is displayed then it won't be displayed untill next cycle if duration has passed.
+> 3. The `option` data provided in first time initilisation of `feedbackForm` is stored in local cache other initilisation data is ignored. 
+
+#### 7. Clear old configuration
+Invoke `reset` method only if there is a need to reset the old `option` values otherwise ignore this.
+```dart
+  void resetForm() async {
+    await feedbackForm.reset();
+ }
+ 
+```
+> **Note** 
+> 1. After resetting the configuration it won't be display the feedback form ever untill new initilisation. 
+> 2. Reset form doesn't mean reset the duration cycle. It just removes the all configuration from the cache.
+> 3. To reset duration and other configuration do call the `feedbackForm.init()` method with new `option` values. 
+
+
+### Display instant `feedbackForm`
+If there is a need to display `feedbackForm` instantly on any time then invoke `feedbackForm.display` method with new `option` values. 
+By calling this method won't reset the duration cycle provided in above step 3.
+
+```dart
+void launchAppFeedback() {
+    feedbackForm.display(context,
+        option: Option(
+          maxRating: 10,
+          ratingButtonTheme: RatingButtonThemeData.defaultTheme,
+        ), onSubmit: (feedback) {
+      print(feedback);
+    });
+  }
+```
+
+
 ## Other Flutter packages
  Name        | Stars        | Pub |
 :-------------------------|------------------------- | ------------------------- |
