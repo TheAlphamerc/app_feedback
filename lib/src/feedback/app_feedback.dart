@@ -47,6 +47,17 @@ abstract class AppFeedback {
   });
 
   /// Invoking `display` method will be displayed `AppFeedback` form instantly
+  /// ```dart
+  ///  void launchAppFeedback() {
+  ///   feedbackForm.display(context,
+  ///       option: Option(
+  ///         maxRating: 10,
+  ///         ratingButtonTheme: RatingButtonThemeData.defaultTheme,
+  ///       ), onSubmit: (feedback) {
+  ///      print(feedback.toString());
+  ///   });
+  /// }
+  /// ```
   display(
     BuildContext context, {
     RatingButtonBuilder ratingButtonBuilder,
