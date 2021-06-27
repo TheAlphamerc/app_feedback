@@ -87,7 +87,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void launchAppFeedback() {
     feedbackForm.display(context,
         option: Option(
-          defaultRating: 5,
           maxRating: 10,
           ratingButtonTheme: RatingButtonThemeData.defaultTheme,
         ), onSubmit: (feedback) {

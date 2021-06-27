@@ -43,6 +43,11 @@ class Option {
   /// Set rating header text
   final String ratingHeader;
 
+  /// Set alignment of header text
+  ///
+  /// By default set to `Alignment.center`
+  final Alignment headerTextAlignment;
+
   /// hide texts displ below ratings
   final bool hideRatingBottomText;
 
@@ -105,8 +110,9 @@ class Option {
     this.reviewFieldHint = "Tell us here",
     this.ratringsBottomText2 = "Yes, Definitely",
     this.ratringsBottomText1 = "Not at all",
+    this.headerTextAlignment = Alignment.center,
     this.reviewFieldHeader = "We would love to improve on your suggestion.",
-    this.ratingHeader = "How likely are you to recommend this app to a friend?",
+    this.ratingHeader = "How likely are you to rate this app?",
     this.isDismissible = true,
     this.hideSuggestionField = false,
     this.hideRatingBottomText = false,
@@ -131,6 +137,7 @@ class Option {
     bool hideSuggestionField,
     int maxRating,
     String ratingHeader,
+    Alignment headerTextAlignment,
     bool hideRatingBottomText,
     String ratringsBottomText1,
     String ratringsBottomText2,
@@ -159,6 +166,7 @@ class Option {
       maxRating: maxRating ?? this.maxRating,
       ratingButtonTheme: ratingButtonTheme ?? this.ratingButtonTheme,
       ratingHeader: ratingHeader ?? this.ratingHeader,
+      headerTextAlignment: headerTextAlignment ?? this.headerTextAlignment,
       ratingHeaderTextStyle:
           ratingHeaderTextStyle ?? this.ratingHeaderTextStyle,
       ratingbottomTextStyle:

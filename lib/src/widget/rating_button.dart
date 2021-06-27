@@ -30,6 +30,7 @@ class RatingButton extends StatelessWidget {
       padding: theme.padding,
       onPressed: () => onPressed(index),
       shape: theme.shape,
+      height: theme.height,
       highlightColor: theme.highlightColor,
       splashColor: theme.splashColor,
       visualDensity: theme.visualDensity,

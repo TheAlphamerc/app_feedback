@@ -23,9 +23,12 @@ class FeedbackPage extends StatelessWidget {
       : super(key: key);
 
   Widget _ratingRow(BuildContext context) {
+    final theme =
+        option.ratingButtonTheme ?? RatingButtonThemeData.defaultTheme;
     return Container(
       width: context.width,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           BlocBuilder<FeedbackCubit, FeedbackState>(
             builder: (context, state) {
@@ -34,10 +37,10 @@ class FeedbackPage extends StatelessWidget {
                 rating = state.rating;
               }
               return Wrap(
-                spacing: 2,
-                alignment: WrapAlignment.start,
-                crossAxisAlignment: WrapCrossAlignment.start,
-                runSpacing: 2,
+                spacing: theme.spacing,
+                alignment: theme.alignment,
+                crossAxisAlignment: theme.crossAxisAlignment,
+                runSpacing: theme.runSpacing,
                 children: Iterable.generate(
                         option.maxRating,
                         (inedx) =>
@@ -46,7 +49,8 @@ class FeedbackPage extends StatelessWidget {
               );
             },
           ),
-          if (!option.hideRatingBottomText)
+          if (!option.hideRatingBottomText) ...[
+            SizedBox(height: 10),
             Row(
               children: [
                 Text(
@@ -62,6 +66,7 @@ class FeedbackPage extends StatelessWidget {
                 ),
               ],
             )
+          ]
         ],
       ),
     );
@@ -113,7 +118,7 @@ class FeedbackPage extends StatelessWidget {
             ),
           )
         ],
-      ),
+      ).pV(24),
     );
   }
 
@@ -167,12 +172,18 @@ class FeedbackPage extends StatelessWidget {
         children: [
           Column(
             children: [
-              Text(option.ratingHeader,
-                      style: option.ratingHeaderTextStyle ??
-                          TextStyles.headline16(context))
-                  .vP16,
-              _ratingRow(context).pB(24),
-              _suggestionField(context).pB(30),
+              Row(
+                children: [
+                  Align(
+                    alignment: option.headerTextAlignment,
+                    child: Text(option.ratingHeader,
+                        style: option.ratingHeaderTextStyle ??
+                            TextStyles.headline16(context)),
+                  ).extended
+                ],
+              ).vP16,
+              _ratingRow(context),
+              _suggestionField(context)
             ],
           ).hP16,
           _submitButton(context).pB(30)

@@ -40,6 +40,33 @@ class RatingButtonThemeData {
 
   /// Defines how compact the button's layout will be.
   final VisualDensity visualDensity;
+
+  /// How much space to place between each rating button in a run in the main axis.
+  ///
+  ///For example, if [spacing] is 10.0, the each rating button will be spaced at least 10.0 logical pixels apart in the main axis.
+  final double spacing;
+
+  /// How much space to place between the each rating button themselves in the cross axis.
+
+  /// For example, if [runSpacing] is 10.0, the each rating button will be spaced at least 10.0 logical pixels apart in the cross axis.
+
+  final double runSpacing;
+
+  /// How the each rating button within a run should be placed in the main axis.
+  ///
+  ///For example, if [alignment] is [WrapAlignment.center], the each rating button in each run are grouped together in the center of their run in the main axis.
+  ///
+  ///Defaults to [WrapAlignment.start].
+
+  final WrapAlignment alignment;
+
+  /// How the each rating button within a run should be aligned relative to each other in the cross axis.
+  ///
+  ///For example, if this is set to [WrapCrossAlignment.end], and the [direction] is [Axis.horizontal], then the  each rating button within each run will have their bottom edges aligned to the bottom edge of the run.
+  ///
+  ///Defaults to [WrapCrossAlignment.start].
+  final WrapCrossAlignment crossAxisAlignment;
+
   const RatingButtonThemeData({
     this.minWidth,
     this.height,
@@ -53,6 +80,10 @@ class RatingButtonThemeData {
     this.elevation,
     this.padding,
     this.visualDensity,
+    this.spacing = 0.0,
+    this.runSpacing = 0.0,
+    this.alignment = WrapAlignment.start,
+    this.crossAxisAlignment = WrapCrossAlignment.start,
   });
 
   RatingButtonThemeData copyWith({
@@ -69,6 +100,10 @@ class RatingButtonThemeData {
     double elevation,
     EdgeInsetsGeometry padding,
     VisualDensity visualDensity,
+    double spacing,
+    double runspacing,
+    WrapAlignment alignment,
+    WrapCrossAlignment crossAxisAlignment,
   }) {
     return RatingButtonThemeData(
       activeTextStyle: activeTextStyle ?? this.activeTextStyle,
@@ -83,6 +118,10 @@ class RatingButtonThemeData {
       splashColor: splashColor ?? this.splashColor,
       inActiveTextStyle: inActiveTextStyle ?? this.inActiveTextStyle,
       visualDensity: visualDensity ?? this.visualDensity,
+      alignment: alignment ?? this.alignment,
+      crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
+      runSpacing: runSpacing ?? this.runSpacing,
+      spacing: spacing ?? this.spacing,
     );
   }
 
