@@ -81,7 +81,7 @@ Invoke `reset` method only if there is a need to reset the old `config` values o
 
 ### Display instant `feedbackForm`
 
-If there is a need to display `feedbackForm` instantly on any time then invoke `feedbackForm.display` method with new `config` values.
+If there is a need to display `feedbackForm` instantly on any time then invoke `feedbackForm.display` method.
 By calling this method won't reset the duration cycle provided in above step 3.
 To invoke below method there is no need to initialize the `feedbackForm`.
 

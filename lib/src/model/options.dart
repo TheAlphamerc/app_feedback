@@ -10,7 +10,7 @@ class FeedbackConfig {
   /// Used for debugging
   final bool displayLogs;
 
-  FeedbackConfig({this.duration, this.displayLogs});
+  FeedbackConfig({@required this.duration, this.displayLogs});
 
   @override
   toString() =>
