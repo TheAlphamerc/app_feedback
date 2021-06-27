@@ -22,13 +22,6 @@ class FeedbackPage extends StatelessWidget {
       this.ratingButtonBuilder})
       : super(key: key);
 
-  static MaterialPageRoute getRoute() {
-    return new MaterialPageRoute(
-      builder: (_) => FeedbackPage(),
-      fullscreenDialog: true,
-    );
-  }
-
   Widget _ratingRow(BuildContext context) {
     return Container(
       width: context.width,
@@ -92,23 +85,6 @@ class FeedbackPage extends StatelessWidget {
       },
       theme: option.ratingButtonTheme ?? RatingButtonThemeData.defaultTheme,
     );
-    return OutlinedButton(
-      onPressed: () {
-        context.read<FeedbackCubit>().setRating = index - 1;
-      },
-      style: ButtonStyle(
-          shape: MaterialStateProperty.all(ContinuousRectangleBorder(
-              borderRadius: BorderRadius.circular(10))),
-          padding: MaterialStateProperty.all(EdgeInsets.zero),
-          foregroundColor: MaterialStateProperty.all(
-              isActive ? context.onPrimary : context.primaryColor),
-          backgroundColor: MaterialStateProperty.all(
-              !isActive ? context.onPrimary : context.primaryColor),
-          side: MaterialStateProperty.all(
-              BorderSide(color: context.disabledColor)),
-          textStyle: MaterialStateProperty.all(TextStyles.headline18(context))),
-      child: Text("$index"),
-    ).pR(index == 10 ? 0 : 5);
   }
 
   Widget _suggestionField(BuildContext context) {

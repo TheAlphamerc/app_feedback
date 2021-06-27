@@ -14,27 +14,20 @@ class SharedPreferenceHelper {
 
   Future<bool> resetForm() async {
     var pref = await SharedPreferences.getInstance();
-    return pref.clear();
-  }
-
-  Future<bool> setInitialLoad(bool value) async {
-    return (await SharedPreferences.getInstance())
-        .setBool(UserPreferenceKey.IsFirstTimeApp.toString(), value);
-  }
-
-  Future<bool> isFirstTime() async {
-    return (await SharedPreferences.getInstance())
-        .getBool(UserPreferenceKey.IsFirstTimeApp.toString());
+    if (pref.containsKey(_FeedbackFormKey.AppFeedback.toString())) {
+      pref.remove(_FeedbackFormKey.AppFeedback.toString());
+    }
+    return true;
   }
 
   Future<bool> saveAppFeedback(UserFeedback model) async {
     return (await SharedPreferences.getInstance()).setString(
-        UserPreferenceKey.AppFeedback.toString(), json.encode(model.toJson()));
+        _FeedbackFormKey.AppFeedback.toString(), json.encode(model.toJson()));
   }
 
   Future<UserFeedback> getAppFeedback() async {
     final jsonString = (await SharedPreferences.getInstance())
-        .getString(UserPreferenceKey.AppFeedback.toString());
+        .getString(_FeedbackFormKey.AppFeedback.toString());
     if (jsonString == null) {
       return null;
     }
@@ -42,4 +35,4 @@ class SharedPreferenceHelper {
   }
 }
 
-enum UserPreferenceKey { IsFirstTimeApp, AppFeedback }
+enum _FeedbackFormKey { AppFeedback }

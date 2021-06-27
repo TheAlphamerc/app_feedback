@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'Feedback form Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        // brightness: Brightness.dark,
       ),
       debugShowCheckedModeBanner: false,
       home: MyHomePage(),
@@ -33,12 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     feedbackForm.init(
-      Option(
-          duration: Duration(seconds: 10),
-          displayLogs: true,
-          defaultRating: 5,
-          defaultReview: "Love this app ❤️"),
-    );
+        FeedbackConfig(duration: Duration(seconds: 10), displayLogs: true));
     super.initState();
   }
 
@@ -101,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void tryDisplay() {
-    feedbackForm.tryDisplay(context, onSubmit: (feedback) {
+    feedbackForm.tryDisplay(context, onSubmit: (UserFeedback feedback) {
       this.feedback = feedback;
       setState(() {});
     });
@@ -116,10 +112,8 @@ class _MyHomePageState extends State<MyHomePage> {
     feedback = null;
 
     /// Initilise the feedback form form after reseting
-    feedbackForm.init(Option(
-      duration: Duration(seconds: 10),
-      displayLogs: true,
-    ));
+    feedbackForm.init(
+        FeedbackConfig(duration: Duration(seconds: 10), displayLogs: true));
 
     setState(() {});
   }

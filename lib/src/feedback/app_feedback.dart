@@ -20,15 +20,15 @@ abstract class AppFeedback {
   ///  AppFeedback feedback = AppFeedback.instance;
   ///  @override
   ///  void initState() {
-  ///    feedback.init(Option(duration: Duration(seconds: 10), displayLogs: true));
+  ///    feedbackForm.init(FeedbackConfig(duration: Duration(seconds: 10)));
   ///    super.initState();
   ///  }
   /// ```
-  void init(Option option);
+  void init(FeedbackConfig config);
 
   /// Display form after specific interval of time.
   ///
-  /// `AppFeedback` form will be displayed once `duration` provided  in [void init(Option option)] is over
+  /// `AppFeedback` form will be displayed once `duration` provided  in [void init(FeedbackConfig config)] is completed
   ///
   /// If `duration` is remaing then nothing will be displayed
   ///```dart
@@ -40,6 +40,7 @@ abstract class AppFeedback {
   ///```
   void tryDisplay(
     BuildContext context, {
+    Option option,
     RatingButtonBuilder ratingButtonBuilder,
     Function(UserFeedback) onSubmit,
     VoidCallback onSkip,
@@ -49,7 +50,7 @@ abstract class AppFeedback {
   display(
     BuildContext context, {
     RatingButtonBuilder ratingButtonBuilder,
-    Function(UserFeedback) onSubmit,
+    void Function(UserFeedback) onSubmit,
     Option option,
   });
   Future<UserFeedback> get savedFeedback;

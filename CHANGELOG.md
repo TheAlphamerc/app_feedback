@@ -1,3 +1,9 @@
-## 0.0.1-dev
+## [0.0.1] - 27 Jun 2021
 
 * Release initial version of package.
+* `init` method added to initialized `feedbackForm`. 
+* `FeedbackConfig` class to initial configure.
+* `Option` class can be used to customized the feedback form.
+* `tryDisplay` method added to ask user feedback periodically.
+* `display` method added to ask user feedback instantly.
+

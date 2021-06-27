@@ -1,17 +1,44 @@
 import 'package:flutter/material.dart';
 
 class RatingButtonThemeData {
+  /// Set minimum width of button
   final double minWidth;
+
+  /// Set height of button
   final double height;
+
+  /// Set button backgroundColor when selected
   final Color activeColor;
+
+  /// Set button backgroundColor when unselected
   final Color inActiveColor;
-  final TextStyle inActiveTextStyle;
-  final Color highlightColor;
-  final Color splashColor;
-  final ShapeBorder shape;
-  final double elevation;
+
+  /// Set button text style when selected
   final TextStyle activeTextStyle;
+
+  /// Set button text when unselected
+  final TextStyle inActiveTextStyle;
+
+  /// The highlight indicates that the button is actively being pressed.
+  ///
+  /// It appears on top of the button's child and quickly spreads to fill the button, and then fades out.
+  final Color highlightColor;
+
+  ///The ink splash indicates that the button has been touched.
+  ///
+  /// It appears on top of the button's child and spreads in an expanding circle beginning where the touch occurred.
+  final Color splashColor;
+
+  /// The button's highlight and splash are clipped to this shape. If the button has an elevation, then its drop shadow is defined by this shape as well.
+  final ShapeBorder shape;
+
+  /// This controls the size of the shadow below the raised button.
+  final double elevation;
+
+  /// The internal padding for the button.
   final EdgeInsetsGeometry padding;
+
+  /// Defines how compact the button's layout will be.
   final VisualDensity visualDensity;
   const RatingButtonThemeData({
     this.minWidth,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:app_feedback/src/theme/theme.dart';
 
 typedef RatingButtonBuilder = Widget Function(
-  BuildContext,
+  BuildContext context,
   int index,
   bool isSelected,
 );
@@ -30,6 +30,9 @@ class RatingButton extends StatelessWidget {
       padding: theme.padding,
       onPressed: () => onPressed(index),
       shape: theme.shape,
+      highlightColor: theme.highlightColor,
+      splashColor: theme.splashColor,
+      visualDensity: theme.visualDensity,
       color: !isActive
           ? theme.inActiveColor ?? context.onPrimary
           : theme.activeColor ?? Theme.of(context).primaryColor,

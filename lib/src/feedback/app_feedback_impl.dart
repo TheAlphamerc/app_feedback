@@ -1,30 +1,32 @@
 part of 'app_feedback.dart';
 
 class AppFeedbackImpl implements AppFeedback {
-  Option option = Option.defaultOption();
+  // Option option = Option.defaultOption();
+  FeedbackConfig config = FeedbackConfig.defaultOption();
   SharedPreferenceHelper pref;
 
   /// Initilise the app feedback form
   @override
-  void init(Option option) async {
-    this.option = option;
+  void init(FeedbackConfig config) async {
+    this.config = config;
     pref = SharedPreferenceHelper();
     var feedback = await pref.getAppFeedback();
     if (feedback != null) {
       final diff = DateTime.now().difference(feedback.createdAt);
 
       Util.cprint("form initialised ${diff.toString()} ago",
-          display: option.displayLogs);
+          display: config.displayLogs);
     } else {
       /// Initilise the timer for the first time
       await pref.saveAppFeedback(UserFeedback(createdAt: DateTime.now()));
-      Util.cprint("initialise for first time", display: option.displayLogs);
+      Util.cprint("initialise for first time", display: config.displayLogs);
     }
   }
 
   @override
   void tryDisplay(
     BuildContext context, {
+    Option option = const Option(),
     RatingButtonBuilder ratingButtonBuilder,
     Function(UserFeedback) onSubmit,
     VoidCallback onSkip,
@@ -35,7 +37,7 @@ class AppFeedbackImpl implements AppFeedback {
             "\nTry to initilise the feedback form first by using below code" +
             "\n\n@override" +
             "\nvoid initState() {" +
-            "\n AppFeedback.instance.init(Option(duration: Duration(seconds: 10), displayLogs: true));" +
+            "\n feedbackForm.init(FeedbackConfig(duration: Duration(seconds: 10)));" +
             "\n super.initState();" +
             "\n}\n");
 
@@ -47,17 +49,23 @@ class AppFeedbackImpl implements AppFeedback {
       /// If user haven't submiited feedback
       /// And if initial feedback duration is found to be longer then user's provided duration.
       /// Display feedback form
-      if (feedback.rating == null && diff.compareTo(option.duration) > 0) {
+      if (feedback.rating == null && diff.compareTo(config.duration) > 0) {
         /// Reset  timer to display FeedbackPage after [Option.duration]
         await pref.saveAppFeedback(UserFeedback(createdAt: DateTime.now()));
 
         /// Display sheet
-        display(context, onSubmit: onSubmit, option: option, onSkip: onSkip);
+        display(
+          context,
+          onSubmit: onSubmit,
+          option: option,
+          onSkip: onSkip,
+          saveToCache: true,
+        );
       }
 
       /// If users alreay submitted his feedback
       /// And provided duration is expired then its time to ask user to give feedback again
-      else if (feedback.rating != null && diff.compareTo(option.duration) > 0) {
+      else if (feedback.rating != null && diff.compareTo(config.duration) > 0) {
         /// Reset save timing to display FeedbackPage after 7 Days.
         await pref
             .saveAppFeedback(feedback.copyWith(createdAt: DateTime.now()));
@@ -67,11 +75,12 @@ class AppFeedbackImpl implements AppFeedback {
             onSubmit: onSubmit,
             option: option,
             onSkip: onSkip,
+            saveToCache: true,
             ratingButtonBuilder: ratingButtonBuilder);
       } else {
-        final remaing = option.duration - diff;
+        final remaing = config.duration - diff;
         Util.cprint("Remaing time: ${remaing.toString()}",
-            display: option.displayLogs);
+            display: config.displayLogs);
       }
     }
   }
@@ -80,7 +89,8 @@ class AppFeedbackImpl implements AppFeedback {
   display(BuildContext context,
       {Function(UserFeedback) onSubmit,
       VoidCallback onSkip,
-      Option option,
+      Option option = const Option(),
+      bool saveToCache = false,
       RatingButtonBuilder ratingButtonBuilder}) async {
     await showModalBottomSheet(
       context: context,
@@ -91,12 +101,12 @@ class AppFeedbackImpl implements AppFeedback {
       shape: option.shape ?? Theme.of(context).bottomSheetTheme.shape,
       builder: (context) {
         return BlocProvider(
-          create: (context) => FeedbackCubit(option),
+          create: (context) => FeedbackCubit(option, saveToCache: saveToCache),
           child: FeedbackPage(
             onSkip: onSkip,
             onSubmit: onSubmit,
             ratingButtonBuilder: ratingButtonBuilder,
-            option: option ?? Option.defaultOption(),
+            option: option,
           ),
         );
       },

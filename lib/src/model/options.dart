@@ -1,7 +1,7 @@
 import 'package:app_feedback/src/model/rating_button/rating_button_theme_data.dart';
 import 'package:flutter/material.dart';
 
-class Option {
+class FeedbackConfig {
   /// The `duration` define interval of time after which form needs tro be displayed
   final Duration duration;
 
@@ -10,6 +10,21 @@ class Option {
   /// Used for debugging
   final bool displayLogs;
 
+  FeedbackConfig({this.duration, this.displayLogs});
+
+  @override
+  toString() =>
+      "\nduration => ${duration.toString()}\ndisplayLogs=> $displayLogs";
+
+  factory FeedbackConfig.defaultOption() {
+    return FeedbackConfig(
+      displayLogs: false,
+      duration: Duration(seconds: 1),
+    );
+  }
+}
+
+class Option {
   /// The [isDismissible] parameter specifies whether the form will be dismissed when user taps on the scrim
   final bool isDismissible;
 
@@ -82,7 +97,6 @@ class Option {
   /// Customise Rating button
   final RatingButtonThemeData ratingButtonTheme;
   const Option({
-    this.duration,
     this.defaultRating,
     this.maxRating = 10,
     this.defaultReview = "",
@@ -93,7 +107,6 @@ class Option {
     this.ratringsBottomText1 = "Not at all",
     this.reviewFieldHeader = "We would love to improve on your suggestion.",
     this.ratingHeader = "How likely are you to recommend this app to a friend?",
-    this.displayLogs = false,
     this.isDismissible = true,
     this.hideSuggestionField = false,
     this.hideRatingBottomText = false,
@@ -111,15 +124,64 @@ class Option {
     // this.ratingButtonBuilder
   });
 
-  factory Option.defaultOption() {
-    return new Option(
-      displayLogs: false,
-      duration: Duration(seconds: 1),
-      defaultReview: "",
+  Option copyWith({
+    bool isDismissible,
+    int defaultRating,
+    String defaultReview,
+    bool hideSuggestionField,
+    int maxRating,
+    String ratingHeader,
+    bool hideRatingBottomText,
+    String ratringsBottomText1,
+    String ratringsBottomText2,
+    String reviewFieldHint,
+    String reviewFieldHeader,
+    String submitButtonText,
+    String skipButtonText,
+    ButtonStyle skipButtonStyle,
+    ButtonStyle submitButtonStyle,
+    TextStyle submitButtonTextStyle,
+    TextStyle ratingHeaderTextStyle,
+    TextStyle ratingbottomTextStyle,
+    TextStyle reviewHeaderTextStyle,
+    TextStyle reviewFieldHintTextStyle,
+    TextStyle reviewfieldTextStyle,
+    Color backgroundColor,
+    ShapeBorder shape,
+  }) {
+    return Option(
+      backgroundColor: backgroundColor ?? this.backgroundColor,
+      defaultRating: defaultRating ?? this.defaultRating,
+      defaultReview: defaultReview ?? this.defaultReview,
+      hideRatingBottomText: hideRatingBottomText ?? this.hideRatingBottomText,
+      hideSuggestionField: hideSuggestionField ?? this.hideSuggestionField,
+      isDismissible: isDismissible ?? this.isDismissible,
+      maxRating: maxRating ?? this.maxRating,
+      ratingButtonTheme: ratingButtonTheme ?? this.ratingButtonTheme,
+      ratingHeader: ratingHeader ?? this.ratingHeader,
+      ratingHeaderTextStyle:
+          ratingHeaderTextStyle ?? this.ratingHeaderTextStyle,
+      ratingbottomTextStyle:
+          ratingbottomTextStyle ?? this.ratingbottomTextStyle,
+      ratringsBottomText1: ratringsBottomText1 ?? this.ratringsBottomText1,
+      ratringsBottomText2: ratringsBottomText2 ?? this.ratringsBottomText2,
+      reviewFieldHeader: reviewFieldHeader ?? this.reviewFieldHeader,
+      reviewFieldHint: reviewFieldHint ?? this.reviewFieldHint,
+      reviewFieldHintTextStyle:
+          reviewFieldHintTextStyle ?? this.reviewFieldHintTextStyle,
+      reviewHeaderTextStyle:
+          reviewHeaderTextStyle ?? this.reviewHeaderTextStyle,
+      reviewfieldTextStyle: reviewfieldTextStyle ?? this.reviewfieldTextStyle,
+      shape: shape ?? this.shape,
+      skipButtonStyle: skipButtonStyle ?? this.skipButtonStyle,
+      skipButtonText: skipButtonText ?? this.skipButtonText,
+      submitButtonStyle: submitButtonStyle ?? this.submitButtonStyle,
+      submitButtonText: submitButtonText ?? this.submitButtonText,
+      submitButtonTextStyle:
+          submitButtonTextStyle ?? this.submitButtonTextStyle,
     );
   }
 
   @override
-  toString() =>
-      "oneTimeOnly => \nduration => ${duration.toString()}\ndisplayLogs=> $displayLogs\ninitialRating=> $defaultRating\nreview=> $defaultReview";
+  toString() => "ninitialRating=> $defaultRating\nreview=> $defaultReview";
 }
