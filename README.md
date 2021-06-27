@@ -6,11 +6,16 @@
 
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/TheAlphamerc/app_feedback.svg)](https://github.com/TheAlphamerc/app_feedback)
 
-A Flutter package for getting app feedback from users.
+A Flutter package for getting app feedback from users. It provides the utility to display feedback form depending upon the requirement. 
+Feedback form can be displayed instantly at any time or after certain period of time.
 
 ## How to use this package
 
 #### 1. Add library to pubspec.yml
+```yaml
+dependencies:
+  app_feedback: ^0.0.0
+```
 
 #### 2. Import library in dart file.
 
@@ -96,6 +101,15 @@ void launchAppFeedback() {
     });
   }
 ```
+
+
+Feedback form |  Customised Rating button        |  Customised Rating button         
+:-------------------------:|:-------------------------:|:-------------------------:
+![](https://github.com/TheAlphamerc/app_feedback/blob/main/screenshots/screenshot-1.jpg?raw=true)|![](https://github.com/TheAlphamerc/app_feedback/blob/main/screenshots/screenshot-2.jpg?raw=true)|![](https://github.com/TheAlphamerc/app_feedback/blob/main/screenshots/screenshot-3.jpg?raw=true)
+
+Hidden feedback field    |  Customised feedback form     |  Customised feedback form    
+:-------------------------:|:-------------------------:|:-------------------------:
+![](https://github.com/TheAlphamerc/app_feedback/blob/main/screenshots/screenshot-4.jpg?raw=true)|![](https://github.com/TheAlphamerc/app_feedback/blob/main/screenshots/screenshot-6.jpg?raw=true)|![](https://github.com/TheAlphamerc/app_feedback/blob/main/screenshots/screenshot-5.jpg?raw=true)
 
 ## Other Flutter packages
 
