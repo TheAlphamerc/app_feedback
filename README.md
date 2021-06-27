@@ -14,7 +14,7 @@ Feedback form can be displayed instantly at any time or after certain period of 
 #### 1. Add library to pubspec.yml
 ```yaml
 dependencies:
-  app_feedback: ^0.0.0
+  app_feedback: ^0.0.1
 ```
 
 #### 2. Import library in dart file.
