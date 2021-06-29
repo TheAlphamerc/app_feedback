@@ -3,22 +3,22 @@ part of 'app_feedback.dart';
 class AppFeedbackImpl implements AppFeedback {
   // Option option = Option.defaultOption();
   FeedbackConfig config = FeedbackConfig.defaultOption();
-  SharedPreferenceHelper pref;
+  SharedPreferenceHelper? pref;
 
   /// Initilise the app feedback form
   @override
   void init(FeedbackConfig config) async {
     this.config = config;
     pref = SharedPreferenceHelper();
-    var feedback = await pref.getAppFeedback();
+    var feedback = await pref!.getAppFeedback();
     if (feedback != null) {
-      final diff = DateTime.now().difference(feedback.createdAt);
+      final diff = DateTime.now().difference(feedback.createdAt!);
 
       Util.cprint("form initialised ${diff.toString()} ago",
           display: config.displayLogs);
     } else {
       /// Initilise the timer for the first time
-      await pref.saveAppFeedback(UserFeedback(createdAt: DateTime.now()));
+      await pref!.saveAppFeedback(UserFeedback(createdAt: DateTime.now()));
       Util.cprint("initialise for first time", display: config.displayLogs);
     }
   }
@@ -26,10 +26,10 @@ class AppFeedbackImpl implements AppFeedback {
   @override
   void tryDisplay(
     BuildContext context, {
-    Option option = const Option(),
-    RatingButtonBuilder ratingButtonBuilder,
-    Function(UserFeedback) onSubmit,
-    VoidCallback onSkip,
+    Option? option = const Option(),
+    RatingButtonBuilder? ratingButtonBuilder,
+    Function(UserFeedback)? onSubmit,
+    VoidCallback? onSkip,
   }) async {
     assert(
         pref != null,
@@ -42,16 +42,16 @@ class AppFeedbackImpl implements AppFeedback {
             "\n}\n");
 
     /// Check if there is already a feedback in local cache
-    var feedback = await pref.getAppFeedback();
+    var feedback = await pref!.getAppFeedback();
     if (feedback != null) {
-      final diff = DateTime.now().difference(feedback.createdAt);
+      final diff = DateTime.now().difference(feedback.createdAt!);
 
       /// If user haven't submiited feedback
       /// And if initial feedback duration is found to be longer then user's provided duration.
       /// Display feedback form
       if (feedback.rating == null && diff.compareTo(config.duration) > 0) {
         /// Reset  timer to display FeedbackPage after [Option.duration]
-        await pref.saveAppFeedback(UserFeedback(createdAt: DateTime.now()));
+        await pref!.saveAppFeedback(UserFeedback(createdAt: DateTime.now()));
 
         /// Display sheet
         display(
@@ -67,7 +67,7 @@ class AppFeedbackImpl implements AppFeedback {
       /// And provided duration is expired then its time to ask user to give feedback again
       else if (feedback.rating != null && diff.compareTo(config.duration) > 0) {
         /// Reset save timing to display FeedbackPage after 7 Days.
-        await pref
+        await pref!
             .saveAppFeedback(feedback.copyWith(createdAt: DateTime.now()));
 
         /// Display sheet
@@ -87,15 +87,15 @@ class AppFeedbackImpl implements AppFeedback {
 
   @override
   display(BuildContext context,
-      {Function(UserFeedback) onSubmit,
-      VoidCallback onSkip,
-      Option option = const Option(),
+      {Function(UserFeedback)? onSubmit,
+      VoidCallback? onSkip,
+      Option? option = const Option(),
       bool saveToCache = false,
-      RatingButtonBuilder ratingButtonBuilder}) async {
+      RatingButtonBuilder? ratingButtonBuilder}) async {
     await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      isDismissible: option.isDismissible,
+      isDismissible: option!.isDismissible,
       backgroundColor: option.backgroundColor ??
           Theme.of(context).bottomSheetTheme.backgroundColor,
       shape: option.shape ?? Theme.of(context).bottomSheetTheme.shape,
@@ -114,10 +114,10 @@ class AppFeedbackImpl implements AppFeedback {
   }
 
   @override
-  Future<UserFeedback> get savedFeedback => pref.getAppFeedback();
+  Future<UserFeedback?> get savedFeedback => pref!.getAppFeedback();
 
   @override
   Future<bool> reset() {
-    return pref.resetForm();
+    return pref!.resetForm();
   }
 }

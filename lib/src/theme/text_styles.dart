@@ -2,7 +2,7 @@ part of 'theme.dart';
 
 class TextStyles {
   static TextStyle bodyText14(BuildContext context) =>
-      context.textTheme.bodyText1.copyWith(
+      context.textTheme.bodyText1!.copyWith(
           fontSize: 14,
           fontWeight: FontWeight.w400,
           color: context.isDarkMode ? Color(0xFFC5C3C3) : Color(0xff424242));

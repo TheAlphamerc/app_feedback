@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton(
-      {Key key,
+      {Key? key,
       this.onPressed,
       this.label,
       this.isLoading,
@@ -14,15 +14,15 @@ class CustomButton extends StatelessWidget {
       this.buttonStyle,
       this.padding = const EdgeInsets.symmetric(horizontal: 40, vertical: 12)})
       : super(key: key);
-  final Function onPressed;
-  final String label;
-  final TextStyle labelStyle;
-  final ValueNotifier<bool> isLoading;
+  final Function? onPressed;
+  final String? label;
+  final TextStyle? labelStyle;
+  final ValueNotifier<bool>? isLoading;
   final bool isWraped;
   final bool isColored;
-  final Color color;
+  final Color? color;
   final EdgeInsetsGeometry padding;
-  final ButtonStyle buttonStyle;
+  final ButtonStyle? buttonStyle;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,7 +46,7 @@ class CustomButton extends StatelessWidget {
                     foregroundColor: MaterialStateProperty.all(
                       Theme.of(context).colorScheme.onPrimary,
                     )),
-            onPressed: loading ? null : onPressed,
+            onPressed: loading ? null : onPressed as void Function()?,
             child: loading
                 ? SizedBox(
                     height: 20,
@@ -58,10 +58,10 @@ class CustomButton extends StatelessWidget {
                       ),
                     ),
                   )
-                : child,
+                : child!,
           );
         },
-        child: Text(label, style: labelStyle),
+        child: Text(label!, style: labelStyle),
       ),
     );
   }

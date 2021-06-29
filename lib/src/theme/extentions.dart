@@ -6,7 +6,7 @@ extension ThemeHelper on BuildContext {
   Color get onPrimary => Theme.of(this).colorScheme.onPrimary;
   Color get surfaceColor => Theme.of(this).colorScheme.surface;
   TextTheme get textTheme => Theme.of(this).textTheme;
-  Color get bodyTextColor => Theme.of(this).textTheme.bodyText1.color;
+  Color? get bodyTextColor => Theme.of(this).textTheme.bodyText1!.color;
   Color get disabledColor => Theme.of(this).disabledColor;
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
 

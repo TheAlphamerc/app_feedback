@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app_feedback/app_feedback.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -30,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   AppFeedback feedbackForm = AppFeedback.instance;
 
-  UserFeedback feedback;
+  UserFeedback? feedback;
   @override
   void initState() {
     feedbackForm.init(
@@ -54,13 +56,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "${feedback.rating}",
+                      "${feedback!.rating}",
                       style: TextStyle(fontSize: 18),
                     ),
                   ],
                 ),
               ),
-              if (feedback.review.isNotEmpty)
+              if (feedback!.review!.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
@@ -73,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       Expanded(
                         child: Text(
-                          "${feedback.review}",
+                          "${feedback!.review}",
                           style: TextStyle(fontSize: 18),
                         ),
                       )
@@ -88,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
     feedbackForm.display(context,
         option: Option(
           maxRating: 10,
-          ratingButtonTheme: RatingButtonThemeData.defaultTheme,
+          ratingButtonTheme: RatingButtonThemeData.outlinedBorder(),
         ), onSubmit: (feedback) {
       this.feedback = feedback;
       setState(() {});
@@ -118,13 +120,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void getAppSavedFeedback() async {
-    final feed = await feedbackForm.savedFeedback;
+    final feed = await (feedbackForm.savedFeedback as FutureOr<UserFeedback>);
     if (feed.rating != null) {
       this.feedback = feed;
     }
   }
 
-  bool get feedbackAvailable => feedback != null && feedback.rating != null;
+  bool get feedbackAvailable => feedback != null && feedback!.rating != null;
 
   @override
   Widget build(BuildContext context) {

@@ -8,9 +8,9 @@ class FeedbackConfig {
   /// The `displayLogs` determine whether to display logs on console or not.
   ///
   /// Used for debugging
-  final bool displayLogs;
+  final bool? displayLogs;
 
-  FeedbackConfig({@required this.duration, this.displayLogs});
+  FeedbackConfig({required this.duration, this.displayLogs});
 
   @override
   toString() =>
@@ -29,7 +29,7 @@ class Option {
   final bool isDismissible;
 
   /// Set initial rating in form
-  final int defaultRating;
+  final int? defaultRating;
 
   /// Set initial review in form
   final String defaultReview;
@@ -70,37 +70,37 @@ class Option {
   final String skipButtonText;
 
   /// Set skip button style
-  final ButtonStyle skipButtonStyle;
+  final ButtonStyle? skipButtonStyle;
 
   /// Set submit button style
-  final ButtonStyle submitButtonStyle;
+  final ButtonStyle? submitButtonStyle;
 
   /// Set text style for submit button
-  final TextStyle submitButtonTextStyle;
+  final TextStyle? submitButtonTextStyle;
 
   /// Set text style for rating header
-  final TextStyle ratingHeaderTextStyle;
+  final TextStyle? ratingHeaderTextStyle;
 
   /// Set text style for rating bottom hint text
-  final TextStyle ratingbottomTextStyle;
+  final TextStyle? ratingbottomTextStyle;
 
   /// Set text style for review field header
-  final TextStyle reviewHeaderTextStyle;
+  final TextStyle? reviewHeaderTextStyle;
 
   /// Set text style for review field hint
-  final TextStyle reviewFieldHintTextStyle;
+  final TextStyle? reviewFieldHintTextStyle;
 
   /// Set text style for review field
-  final TextStyle reviewfieldTextStyle;
+  final TextStyle? reviewfieldTextStyle;
 
   /// Set the backgroundColor of form
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   /// `shape` defines the shape of the form
-  final ShapeBorder shape;
+  final ShapeBorder? shape;
 
   /// Customise Rating button
-  final RatingButtonThemeData ratingButtonTheme;
+  final RatingButtonThemeData? ratingButtonTheme;
   const Option({
     this.defaultRating,
     this.maxRating = 10,
@@ -131,30 +131,30 @@ class Option {
   });
 
   Option copyWith({
-    bool isDismissible,
-    int defaultRating,
-    String defaultReview,
-    bool hideSuggestionField,
-    int maxRating,
-    String ratingHeader,
-    Alignment headerTextAlignment,
-    bool hideRatingBottomText,
-    String ratringsBottomText1,
-    String ratringsBottomText2,
-    String reviewFieldHint,
-    String reviewFieldHeader,
-    String submitButtonText,
-    String skipButtonText,
-    ButtonStyle skipButtonStyle,
-    ButtonStyle submitButtonStyle,
-    TextStyle submitButtonTextStyle,
-    TextStyle ratingHeaderTextStyle,
-    TextStyle ratingbottomTextStyle,
-    TextStyle reviewHeaderTextStyle,
-    TextStyle reviewFieldHintTextStyle,
-    TextStyle reviewfieldTextStyle,
-    Color backgroundColor,
-    ShapeBorder shape,
+    bool? isDismissible,
+    int? defaultRating,
+    String? defaultReview,
+    bool? hideSuggestionField,
+    int? maxRating,
+    String? ratingHeader,
+    Alignment? headerTextAlignment,
+    bool? hideRatingBottomText,
+    String? ratringsBottomText1,
+    String? ratringsBottomText2,
+    String? reviewFieldHint,
+    String? reviewFieldHeader,
+    String? submitButtonText,
+    String? skipButtonText,
+    ButtonStyle? skipButtonStyle,
+    ButtonStyle? submitButtonStyle,
+    TextStyle? submitButtonTextStyle,
+    TextStyle? ratingHeaderTextStyle,
+    TextStyle? ratingbottomTextStyle,
+    TextStyle? reviewHeaderTextStyle,
+    TextStyle? reviewFieldHintTextStyle,
+    TextStyle? reviewfieldTextStyle,
+    Color? backgroundColor,
+    ShapeBorder? shape,
   }) {
     return Option(
       backgroundColor: backgroundColor ?? this.backgroundColor,

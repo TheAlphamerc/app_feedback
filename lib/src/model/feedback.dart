@@ -2,9 +2,9 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class UserFeedback {
-  final int rating;
-  final String review;
-  final DateTime createdAt;
+  final int? rating;
+  final String? review;
+  final DateTime? createdAt;
 
   UserFeedback({this.rating, this.review, this.createdAt});
 
@@ -25,7 +25,7 @@ class UserFeedback {
     };
   }
 
-  UserFeedback copyWith({int rating, String review, DateTime createdAt}) {
+  UserFeedback copyWith({int? rating, String? review, DateTime? createdAt}) {
     return UserFeedback(
       rating: rating ?? this.rating,
       createdAt: createdAt ?? this.createdAt,

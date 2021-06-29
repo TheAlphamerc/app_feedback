@@ -40,10 +40,10 @@ abstract class AppFeedback {
   ///```
   void tryDisplay(
     BuildContext context, {
-    Option option,
-    RatingButtonBuilder ratingButtonBuilder,
-    Function(UserFeedback) onSubmit,
-    VoidCallback onSkip,
+    Option? option,
+    RatingButtonBuilder? ratingButtonBuilder,
+    Function(UserFeedback)? onSubmit,
+    VoidCallback? onSkip,
   });
 
   /// Invoking `display` method will be displayed `AppFeedback` form instantly
@@ -60,11 +60,11 @@ abstract class AppFeedback {
   /// ```
   display(
     BuildContext context, {
-    RatingButtonBuilder ratingButtonBuilder,
-    void Function(UserFeedback) onSubmit,
-    Option option,
+    RatingButtonBuilder? ratingButtonBuilder,
+    void Function(UserFeedback)? onSubmit,
+    Option? option,
   });
-  Future<UserFeedback> get savedFeedback;
+  Future<UserFeedback?> get savedFeedback;
 
   /// Clear the saved feedback data.
   ///

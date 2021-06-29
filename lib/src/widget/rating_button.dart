@@ -9,13 +9,13 @@ typedef RatingButtonBuilder = Widget Function(
 );
 
 class RatingButton extends StatelessWidget {
-  final bool isActive;
-  final int index;
-  final Function(int) onPressed;
+  final bool? isActive;
+  final int? index;
+  final Function(int?)? onPressed;
   final ShapeBorder shape;
-  final RatingButtonThemeData theme;
+  final RatingButtonThemeData? theme;
   const RatingButton({
-    Key key,
+    Key? key,
     this.isActive,
     this.index,
     this.onPressed,
@@ -26,21 +26,21 @@ class RatingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      minWidth: theme.minWidth,
-      padding: theme.padding,
-      onPressed: () => onPressed(index),
-      shape: theme.shape,
-      height: theme.height,
-      highlightColor: theme.highlightColor,
-      splashColor: theme.splashColor,
-      visualDensity: theme.visualDensity,
-      color: !isActive
-          ? theme.inActiveColor ?? context.onPrimary
-          : theme.activeColor ?? Theme.of(context).primaryColor,
-      elevation: theme.elevation,
+      minWidth: theme!.minWidth,
+      padding: theme!.padding,
+      onPressed: () => onPressed!(index),
+      shape: theme!.shape,
+      height: theme!.height,
+      highlightColor: theme!.highlightColor,
+      splashColor: theme!.splashColor,
+      visualDensity: theme!.visualDensity,
+      color: !isActive!
+          ? theme!.inActiveColor ?? context.onPrimary
+          : theme!.activeColor ?? Theme.of(context).primaryColor,
+      elevation: theme!.elevation,
       child: Text(
         "$index",
-        style: isActive ? theme.activeTextStyle : theme.inActiveTextStyle,
+        style: isActive! ? theme!.activeTextStyle : theme!.inActiveTextStyle,
       ),
     );
   }

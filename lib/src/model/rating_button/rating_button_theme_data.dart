@@ -2,44 +2,44 @@ import 'package:flutter/material.dart';
 
 class RatingButtonThemeData {
   /// Set minimum width of button
-  final double minWidth;
+  final double? minWidth;
 
   /// Set height of button
-  final double height;
+  final double? height;
 
   /// Set button backgroundColor when selected
-  final Color activeColor;
+  final Color? activeColor;
 
   /// Set button backgroundColor when unselected
-  final Color inActiveColor;
+  final Color? inActiveColor;
 
   /// Set button text style when selected
-  final TextStyle activeTextStyle;
+  final TextStyle? activeTextStyle;
 
   /// Set button text when unselected
-  final TextStyle inActiveTextStyle;
+  final TextStyle? inActiveTextStyle;
 
   /// The highlight indicates that the button is actively being pressed.
   ///
   /// It appears on top of the button's child and quickly spreads to fill the button, and then fades out.
-  final Color highlightColor;
+  final Color? highlightColor;
 
   ///The ink splash indicates that the button has been touched.
   ///
   /// It appears on top of the button's child and spreads in an expanding circle beginning where the touch occurred.
-  final Color splashColor;
+  final Color? splashColor;
 
   /// The button's highlight and splash are clipped to this shape. If the button has an elevation, then its drop shadow is defined by this shape as well.
-  final ShapeBorder shape;
+  final ShapeBorder? shape;
 
   /// This controls the size of the shadow below the raised button.
-  final double elevation;
+  final double? elevation;
 
   /// The internal padding for the button.
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
 
   /// Defines how compact the button's layout will be.
-  final VisualDensity visualDensity;
+  final VisualDensity? visualDensity;
 
   /// How much space to place between each rating button in a run in the main axis.
   ///
@@ -87,23 +87,23 @@ class RatingButtonThemeData {
   });
 
   RatingButtonThemeData copyWith({
-    double minWidth,
-    double height,
-    TextStyle activeTextStyle,
-    TextStyle inActiveTextStyle,
-    Color inActiveColor,
-    Color activeColor,
-    Color textColor,
-    Color highlightColor,
-    Color splashColor,
-    ShapeBorder shape,
-    double elevation,
-    EdgeInsetsGeometry padding,
-    VisualDensity visualDensity,
-    double spacing,
-    double runspacing,
-    WrapAlignment alignment,
-    WrapCrossAlignment crossAxisAlignment,
+    double? minWidth,
+    double? height,
+    TextStyle? activeTextStyle,
+    TextStyle? inActiveTextStyle,
+    Color? inActiveColor,
+    Color? activeColor,
+    Color? textColor,
+    Color? highlightColor,
+    Color? splashColor,
+    ShapeBorder? shape,
+    double? elevation,
+    EdgeInsetsGeometry? padding,
+    VisualDensity? visualDensity,
+    double? spacing,
+    double? runspacing,
+    WrapAlignment? alignment,
+    WrapCrossAlignment? crossAxisAlignment,
   }) {
     return RatingButtonThemeData(
       activeTextStyle: activeTextStyle ?? this.activeTextStyle,
@@ -120,7 +120,7 @@ class RatingButtonThemeData {
       visualDensity: visualDensity ?? this.visualDensity,
       alignment: alignment ?? this.alignment,
       crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
-      runSpacing: runSpacing ?? this.runSpacing,
+      runSpacing: runSpacing,
       spacing: spacing ?? this.spacing,
     );
   }
@@ -130,7 +130,7 @@ class RatingButtonThemeData {
         minWidth: 40,
         padding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
-            side: BorderSide(width: .8, color: Colors.grey[300])),
+            side: BorderSide(width: .8, color: Colors.grey[300]!)),
         elevation: 0,
       );
 
@@ -140,6 +140,22 @@ class RatingButtonThemeData {
       defaultTheme.copyWith(
           shape:
               RoundedRectangleBorder(side: side, borderRadius: borderRadius));
+
+  static RatingButtonThemeData outlinedBorder({
+    Color borderColor = Colors.grey,
+    double borderWidth = 1.0,
+    BorderStyle borderStyle = BorderStyle.solid,
+    double borderRadius = 4.0,
+  }) =>
+      defaultTheme.copyWith(
+          inActiveColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: borderColor,
+                width: borderWidth,
+                style: borderStyle,
+              ),
+              borderRadius: BorderRadius.circular(borderRadius)));
 
   static RatingButtonThemeData get circular =>
       defaultTheme.copyWith(shape: CircleBorder());

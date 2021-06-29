@@ -10,12 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FeedbackPage extends StatelessWidget {
-  final Function(UserFeedback) onSubmit;
-  final VoidCallback onSkip;
-  final Option option;
-  final RatingButtonBuilder ratingButtonBuilder;
+  final Function(UserFeedback)? onSubmit;
+  final VoidCallback? onSkip;
+  final Option? option;
+  final RatingButtonBuilder? ratingButtonBuilder;
   const FeedbackPage(
-      {Key key,
+      {Key? key,
       this.onSubmit,
       this.onSkip,
       this.option,
@@ -24,7 +24,7 @@ class FeedbackPage extends StatelessWidget {
 
   Widget _ratingRow(BuildContext context) {
     final theme =
-        option.ratingButtonTheme ?? RatingButtonThemeData.defaultTheme;
+        option!.ratingButtonTheme ?? RatingButtonThemeData.defaultTheme;
     return Container(
       width: context.width,
       child: Column(
@@ -42,26 +42,26 @@ class FeedbackPage extends StatelessWidget {
                 crossAxisAlignment: theme.crossAxisAlignment,
                 runSpacing: theme.runSpacing,
                 children: Iterable.generate(
-                        option.maxRating,
+                        option!.maxRating,
                         (inedx) =>
                             _ratingButton(context, inedx, rating == inedx))
                     .toList(),
               );
             },
           ),
-          if (!option.hideRatingBottomText) ...[
+          if (!option!.hideRatingBottomText) ...[
             SizedBox(height: 10),
             Row(
               children: [
                 Text(
-                  option.ratringsBottomText1,
-                  style: option.ratingbottomTextStyle ??
+                  option!.ratringsBottomText1,
+                  style: option!.ratingbottomTextStyle ??
                       TextStyles.headline14(context),
                 ),
                 Spacer(),
                 Text(
-                  option.ratringsBottomText2,
-                  style: option.ratingbottomTextStyle ??
+                  option!.ratringsBottomText2,
+                  style: option!.ratingbottomTextStyle ??
                       TextStyles.headline14(context),
                 ),
               ],
@@ -79,7 +79,7 @@ class FeedbackPage extends StatelessWidget {
         onTap: () {
           context.read<FeedbackCubit>().setRating = index - 1;
         },
-        child: ratingButtonBuilder(context, index, isActive),
+        child: ratingButtonBuilder!(context, index, isActive),
       );
     }
     return RatingButton(
@@ -88,12 +88,12 @@ class FeedbackPage extends StatelessWidget {
       onPressed: (val) {
         context.read<FeedbackCubit>().setRating = index - 1;
       },
-      theme: option.ratingButtonTheme ?? RatingButtonThemeData.defaultTheme,
+      theme: option!.ratingButtonTheme ?? RatingButtonThemeData.defaultTheme,
     );
   }
 
   Widget _suggestionField(BuildContext context) {
-    if (option.hideSuggestionField) {
+    if (option!.hideSuggestionField) {
       return SizedBox();
     }
     return Container(
@@ -101,18 +101,18 @@ class FeedbackPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            option.reviewFieldHeader,
+            option!.reviewFieldHeader,
             style:
-                option.reviewHeaderTextStyle ?? TextStyles.headline16(context),
+                option!.reviewHeaderTextStyle ?? TextStyles.headline16(context),
           ).pB(12),
           TextFormField(
             maxLines: 5,
             controller: context.select((FeedbackCubit value) => value.review),
             style:
-                option.reviewfieldTextStyle ?? TextStyles.bodyText15(context),
+                option!.reviewfieldTextStyle ?? TextStyles.bodyText15(context),
             decoration: InputDecoration(
-              hintText: option.reviewFieldHint,
-              hintStyle: option.reviewFieldHintTextStyle ??
+              hintText: option!.reviewFieldHint,
+              hintStyle: option!.reviewFieldHintTextStyle ??
                   TextStyles.bodyText14(context),
               border: OutlineInputBorder(),
             ),
@@ -133,17 +133,17 @@ class FeedbackPage extends StatelessWidget {
               onPressed: () async {
                 Navigator.pop(context);
               },
-              style: option.skipButtonStyle,
-              child: Text(option.skipButtonText),
+              style: option!.skipButtonStyle,
+              child: Text(option!.skipButtonText),
             ),
           ),
           CustomButton(
             isWraped: true,
-            label: option.submitButtonText,
+            label: option!.submitButtonText,
             isColored: true,
             isLoading: context.select((FeedbackCubit value) => value.isLoading),
-            buttonStyle: option.submitButtonStyle,
-            labelStyle: option.submitButtonTextStyle ??
+            buttonStyle: option!.submitButtonStyle,
+            labelStyle: option!.submitButtonTextStyle ??
                 TextStyles.headline16(context)
                     .copyWith(fontSize: 14)
                     .onPrimary(context),
@@ -154,7 +154,7 @@ class FeedbackPage extends StatelessWidget {
               }
               if (onSubmit != null) {
                 var model = await context.read<FeedbackCubit>().getFeedback();
-                onSubmit(model);
+                onSubmit!(model);
               }
               Navigator.pop(context);
             },
@@ -175,9 +175,9 @@ class FeedbackPage extends StatelessWidget {
               Row(
                 children: [
                   Align(
-                    alignment: option.headerTextAlignment,
-                    child: Text(option.ratingHeader,
-                        style: option.ratingHeaderTextStyle ??
+                    alignment: option!.headerTextAlignment,
+                    child: Text(option!.ratingHeader,
+                        style: option!.ratingHeaderTextStyle ??
                             TextStyles.headline16(context)),
                   ).extended
                 ],

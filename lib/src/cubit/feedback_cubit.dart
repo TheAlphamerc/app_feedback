@@ -7,21 +7,21 @@ import 'package:app_feedback/src/model/feedback.dart';
 part 'feedback_state.dart';
 
 class FeedbackCubit extends Cubit<FeedbackState> {
-  final Option option;
+  final Option? option;
   final bool saveToCache;
   FeedbackCubit(this.option, {this.saveToCache = false})
       : super(FeedbackInitial()) {
     review = TextEditingController();
-    if (option != null && option.defaultRating != null) {
-      if (option.defaultRating != null) {
-        setRating = option.defaultRating - 1;
+    if (option != null && option!.defaultRating != null) {
+      if (option!.defaultRating != null) {
+        setRating = option!.defaultRating! - 1;
       }
-      review.text = option.defaultReview;
+      review!.text = option!.defaultReview;
     }
   }
 
-  int rating;
-  TextEditingController review;
+  int? rating;
+  TextEditingController? review;
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
   set setRating(int rating) {
     this.rating = rating;
@@ -30,7 +30,7 @@ class FeedbackCubit extends Cubit<FeedbackState> {
 
   Future<UserFeedback> getFeedback() async {
     UserFeedback feedback = UserFeedback(
-        rating: rating + 1, review: review.text, createdAt: DateTime.now());
+        rating: rating! + 1, review: review!.text, createdAt: DateTime.now());
     if (saveToCache) {
       final pref = SharedPreferenceHelper();
       await pref.saveAppFeedback(feedback);

@@ -1,10 +1,10 @@
 name: app_feedback
-description: A Flutter package for getting app feedback from users. It provides the utility to display feedback form depending upon the requirement. Feedback form can be displayed instantly at any time or after certain period of time.
-version: 0.0.1
+description: A Flutter package for getting app feedback from users.
+version: 0.0.2
 homepage: https://github.com/TheAlphamerc/app_feedback
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
   flutter: ">=1.20.0"
 
 dependencies:

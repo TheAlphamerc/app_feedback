@@ -25,7 +25,7 @@ class SharedPreferenceHelper {
         _FeedbackFormKey.AppFeedback.toString(), json.encode(model.toJson()));
   }
 
-  Future<UserFeedback> getAppFeedback() async {
+  Future<UserFeedback?> getAppFeedback() async {
     final jsonString = (await SharedPreferences.getInstance())
         .getString(_FeedbackFormKey.AppFeedback.toString());
     if (jsonString == null) {
