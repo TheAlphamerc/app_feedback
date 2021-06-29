@@ -69,5 +69,5 @@ abstract class AppFeedback {
   /// Clear the saved feedback data.
   ///
   /// It is recommended to initilise the `AppFeedback` form after reset.
-  Future<bool> reset();
+  Future<bool> clearConfig();
 }

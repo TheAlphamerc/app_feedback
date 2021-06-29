@@ -105,8 +105,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   /// Clear saved user's feedback from cache
-  void resetForm() async {
-    await feedbackForm.reset();
+  void clearConfig() async {
+    await feedbackForm.clearConfig();
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text("Form reset successfully!!")));
@@ -163,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(height: 20),
               MaterialButton(
                 colorBrightness: Brightness.light,
-                onPressed: resetForm,
+                onPressed: clearConfig,
                 child: Text("Reset Form"),
                 textColor: Colors.white,
                 color: Colors.blue[400],

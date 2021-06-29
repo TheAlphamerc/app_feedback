@@ -23,7 +23,7 @@ Feedback form can be displayed instantly at any time or after certain period of 
 #### 1. Add library to pubspec.yml
 ```yaml
 dependencies:
-  app_feedback: ^0.0.1
+  app_feedback: ^0.0.2
 ```
 
 #### 2. Import library in dart file.
@@ -78,19 +78,18 @@ TextButton(
 
 #### 7. Clear old configuration
 
-Invoke `reset` method only if there is a need to reset the old `config` values otherwise ignore this.
+Invoke `clearConfig` method only if there is a need to clear the old `config` values otherwise ignore this.
 
 ```dart
-  void resetForm() async {
-    await feedbackForm.reset();
+  void clearConfig() async {
+    await feedbackForm.clearConfig();
  }
-
 ```
 
 > **Note**
 >
-> 1. After resetting the configuration it won't be display the feedback form ever until new initialization.
-> 2. Reset form doesn't mean reset the duration cycle. It just removes the all configuration from the cache.
+> 1. After clearing the configuration it won't be display the feedback form ever until new initialization.
+> 2. Clear configuration form doesn't mean reset the duration cycle. It just removes the all configuration from the cache.
 > 3. To reset duration and other configuration do call the `feedbackForm.init()` method with new `config` values.
 
 ### Display instant `feedbackForm`

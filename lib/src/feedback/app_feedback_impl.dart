@@ -117,7 +117,7 @@ class AppFeedbackImpl implements AppFeedback {
   Future<UserFeedback?> get savedFeedback => pref!.getAppFeedback();
 
   @override
-  Future<bool> reset() {
-    return pref!.resetForm();
+  Future<bool> clearConfig() {
+    return pref!.clearConfig();
   }
 }

@@ -12,7 +12,7 @@ class SharedPreferenceHelper {
     return _singleton;
   }
 
-  Future<bool> resetForm() async {
+  Future<bool> clearConfig() async {
     var pref = await SharedPreferences.getInstance();
     if (pref.containsKey(_FeedbackFormKey.AppFeedback.toString())) {
       pref.remove(_FeedbackFormKey.AppFeedback.toString());
